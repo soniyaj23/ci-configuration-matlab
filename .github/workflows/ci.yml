@@ -33,9 +33,9 @@ jobs:
       #   uses: matlab-actions/run-build@v2
 
       # You can use "run-command" to execute custom MATLAB scripts, functions, or statements
-      - name: Run custom testing procedure
+      - name: Run custom script to test secrets
         uses: matlab-actions/run-command@v2
         with:
           command: disp('Running my custom testing procedure!'); addpath('code'); secrettest;
         env:
-          MY_SECRET: ${{ secrets.MW_MY_API_KEY }}
+          MATLAB_APP_KEY: ${{ secrets.MW_MY_API_KEY }}
