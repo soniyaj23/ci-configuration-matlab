@@ -38,4 +38,4 @@ jobs:
         with:
           command: disp('Running my custom testing procedure!'); addpath('code'); secrettest;
         env:
-          MATLAB_APP_KEY: ${{ secrets.MW_MY_API_KEY }}
+          MATLAB_APP_KEY: ${{ secrets.MY_GITHUB_API_KEY }}
