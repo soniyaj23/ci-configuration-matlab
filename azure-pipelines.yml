@@ -1,7 +1,11 @@
+trigger:
+- main  # or your default branch
+
 pool:
   vmImage: ubuntu-latest
-steps:
-  - task: InstallMATLAB@1
+
+variables:
+- group: matlab-secrets  # Add this line to import the variable group
   # - task: RunMATLABTests@1
   #   inputs:
   #     sourceFolder: code
@@ -20,6 +24,16 @@ steps:
   #     pathToSources: 'code/'
 
   # As an alternative to RunMATLABTests, you can use RunMATLABCommand to execute a MATLAB script, function, or statement.
-  - task: RunMATLABCommand@1
-    inputs:
-      command: disp('Running my custom testing procedure!'); addpath('code'); secrettest;
+  # - task: RunMATLABCommand@1
+  #   inputs:
+  #     command: disp('Running my custom testing procedure!'); addpath('code'); secrettest;
+
+steps:
+  - task: InstallMATLAB@1
+
+  - script: |
+      echo "Running my custom testing procedure!"
+      matlab -batch "secrettest"
+    displayName: "Run secrettest MATLAB script"
+    env:
+      MATLAB_APP_KEY: $(API_KEY)  # Set env var for MATLAB
